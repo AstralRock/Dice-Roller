@@ -1,0 +1,47 @@
+Dylan Checker
+[Strength] 6
+[Perception] 2
+[Dexterity] 2
+[Technical] 1
+[Attunement] 3
+[Constitution] 6
+
+Aria Checker
+[Strength] 4
+[Perception] 5
+[Dexterity] 3
+[Technical] 2
+[Attunement] 4
+[Constitution] 5
+
+Xander Checker
+[Strength] 3
+[Perception] 4
+[Dexterity] 6
+[Technical] 7
+[Attunement] 6
+[Constitution] 4
+
+Luna Checker
+[Strength] 2
+[Perception] 6
+[Dexterity] 4
+[Technical] 3
+[Attunement] 5
+[Constitution] 3
+
+Ethan Checker
+[Strength] 5
+[Perception] 3
+[Dexterity] 5
+[Technical] 4
+[Attunement] 2
+[Constitution] 4
+
+Zara Checker
+[Strength] 3
+[Perception] 5
+[Dexterity] 3
+[Technical] 3
+[Attunement] 6
+[Constitution] 2
