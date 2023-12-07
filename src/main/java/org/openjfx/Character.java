@@ -1,78 +1,109 @@
 package org.openjfx;
 
+class Character {
+    private String name;
+    private int strength, perception, dexterity, technical, attunement, constitution;
+    private int buffTurnsLeft = 0;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
-
-import java.util.ArrayList;
-
-public class Character {
-    private ArrayList<String[]> characters = new ArrayList<String[]>();
-    private ArrayList<String> charNames = new ArrayList<String>();
-    public Character() {
-        File f = new File("characters.txt");
-        try {
-            Scanner sc = new Scanner(f);
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine().toUpperCase().trim();
-                if (line.length() > 0) { // Check if line has a length greater than 0
-                    String identifier = line.substring(0, 1);
-                    if (!identifier.equals("[") && !identifier.equals("\n") && !identifier.equals(" ")) {
-                        String[] chararcStrings = { line, "Strength", "Perception", "Dexterity", "Technical", "Attunement","Constitution" };
-
-                        charNames.add(line);
-
-                        //cycles through the next few lines to and incrementally overwrite the default values of the array
-                        //looks for the last ] of the character entry, takes the rest and trims it, this should catch any stupid extra spaces in case the user is dumb
-                        for (int i = 1; i < chararcStrings.length; i++) {
-                            String nextLine = sc.nextLine();
-                            int numIndex = nextLine.indexOf("]");
-                            chararcStrings[i] = nextLine.substring(numIndex + 1).trim();
-                        }
-                        characters.add(chararcStrings);
-                    }
-                }
-            }
-            sc.close();
-
-            // Print out the entire ArrayList
-            System.out.println("Characters loaded");
-            // for (String[] character : characters) {
-            //     for (String attribute : character) {
-            //         System.out.print(" "+attribute);
-            //     }
-            //     System.out.println();
-            // }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public Character(String[] chararcStrings) {
+        this.name = chararcStrings[0];
+        this.strength = Integer.parseInt(chararcStrings[1]);
+        this.perception = Integer.parseInt(chararcStrings[2]);
+        this.dexterity = Integer.parseInt(chararcStrings[3]);
+        this.technical = Integer.parseInt(chararcStrings[4]);
+        this.attunement = Integer.parseInt(chararcStrings[5]);
+        this.constitution = Integer.parseInt(chararcStrings[6]);
+    }
+    
+    public int getStat(int statNum) {
+        switch (statNum) {
+            case 0:
+                return strength;
+            case 1:
+                return perception;
+            case 2:
+                return dexterity;
+            case 3:
+                return technical;
+            case 4:
+                return attunement;
+            case 5:
+                return constitution;
+            default:
+                return 0;
         }
     }
 
-
-        public String[] getCharacter(String name) {
-            name = name.toUpperCase().trim();
-            for (int i = 0; i < charNames.size(); i++)
-            {
-                if (charNames.get(i).equals(name))
-                {
-                    //System.out.println("Character found "+charNames.get(i));
-                    return characters.get(i);
-                }
+    public void addBuff(int attunementLevel, int buffType, boolean isBuff) {
+        if (isBuff) {
+            switch (buffType) {
+                case 0:
+                    strength += attunementLevel/2;
+                    break;
+                case 1:
+                    perception += attunementLevel;
+                    break;
+                case 2:
+                    dexterity += attunementLevel;
+                    break;
+                case 3:
+                    technical += attunementLevel;
+                    break;
+                case 4:
+                    attunement += attunementLevel;
+                    break;
+                case 5:
+                    constitution += attunementLevel;
+                    break;
+                default:
+                    break;
             }
-            System.out.println("Character not found");
-            String[] nochar = {"-1"};
-            return nochar;
-        }
 
-        public int getStat(String name, int statNum) {
-            String[] character = getCharacter(name);
-            return Integer.parseInt(character[statNum+1]);
+        buffTurnsLeft = attunementLevel/2;
         }
-
-        public int numCharactersLoaded() {
-            return characters.size();
+        else {
+            switch (buffType) {
+                case 0:
+                    strength -= attunementLevel/2;
+                    break;
+                case 1:
+                    perception -= attunementLevel/2;
+                    break;
+                case 2:
+                    dexterity -= attunementLevel/2;
+                    break;
+                case 3:
+                    technical -= attunementLevel/2;
+                    break;
+                case 4:
+                    attunement -= attunementLevel/2;
+                    break;
+                case 5:
+                    constitution -= attunementLevel/2;
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void removeTurn()
+    {
+        buffTurnsLeft--;
+        if(buffTurnsLeft == 0)
+        {
+            buffTurnsLeft = 0;
+        }
+        if(buffTurnsLeft < 0)
+        {
+            buffTurnsLeft = 0;
+        }
+    }
+
+}
+

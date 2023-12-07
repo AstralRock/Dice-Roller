@@ -3,12 +3,12 @@ package org.openjfx;
 public class Logic {
     
     private String name;
+    private Character chara;
     private final int DEAFAULT_SUCCESS_NUMBER = 11;
     private final int DEAFAULT_STAT_NUMBER = 4; 
 
-    Character c = new Character();
-    public Logic(String name) {
-        this.name = name;
+    public Logic(Character chara) {
+        chara = this.chara;
     }
 
 
@@ -29,7 +29,7 @@ public class Logic {
     {
         int die = rollDie(false);
         //success number calculations
-        int stat = c.getStat(name, statNum);
+        int stat = chara.getStat(statNum);
         int modifer = 0;
         String[] statName = {"Strength", "Perception", "Dexterity", "Technical", "Attunement","Constitution"};
 
@@ -87,7 +87,7 @@ public class Logic {
         {
 
             System.out.println("Bro blocked: "+statNum+" damage dealt "+damage);
-            return damage - c.getStat(name, statNum);
+            return damage - chara.getStat(statNum);
         }
         System.out.println("bro failed to block, damage dealt: "+damage);
         return damage;
@@ -107,7 +107,7 @@ public class Logic {
         int[] succNum = {14, 18, 22};
         int successNumber = succNum[iceLVL-1];
         int modifer = 0;
-        int stat = c.getStat(name, 3);
+        int stat = chara.getStat(3);
 
             if(stat > DEAFAULT_STAT_NUMBER)
             {
@@ -131,7 +131,7 @@ public class Logic {
 
     public boolean mindControl()
     {
-        int stat = c.getStat(name, 4);
+        int stat = chara.getStat(4);
         int modifer = 0;
         if(stat > DEAFAULT_STAT_NUMBER)
         {
@@ -155,7 +155,7 @@ public class Logic {
 
     public int magicHeal()
     {
-        int stat = c.getStat(name, 4);
+        int stat = chara.getStat(4);
         int modifer = 0;
         if(stat > DEAFAULT_STAT_NUMBER)
         {
