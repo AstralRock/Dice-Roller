@@ -1,2 +1,8 @@
+org/openjfx/Character.class
+org/openjfx/Characters.class
+org/openjfx/BLogic.class
+org/openjfx/Logic.class
+org/openjfx/Controller.class
 module-info.class
-org/openjfx/App.class
+org/openjfx/Console.class
+org/openjfx/Main.class

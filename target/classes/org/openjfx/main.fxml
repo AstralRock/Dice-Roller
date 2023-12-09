@@ -10,13 +10,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.6488294314381271" prefHeight="600.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.6488294314381271" prefHeight="600.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -29,12 +30,7 @@
                               <Font name="Arial Black" size="31.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="input" layoutX="14.0" layoutY="75.0" prefHeight="39.0" prefWidth="181.0" promptText="Input character" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="75.0" />
-                        <Button fx:id="reload" layoutX="279.0" layoutY="75.0" mnemonicParsing="false" text="RELOAD CHARCTERS" AnchorPane.rightAnchor="10.0">
-                           <font>
-                              <Font name="Arial Black" size="12.0" />
-                           </font>
-                        </Button>
+                        <TextField fx:id="setCharacter" layoutX="14.0" layoutY="75.0" onAction="#handleSetCharacterInput" prefHeight="39.0" prefWidth="181.0" promptText="Input character" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="75.0" />
                      </children>
                   </AnchorPane>
                   <GridPane hgap="8.0" prefHeight="357.0" prefWidth="424.0" vgap="8.0">
@@ -68,11 +64,6 @@
                             </font>
                         </Button>
                         <Button fx:id="coinflip" mnemonicParsing="false" onAction="#handleCoinflipButtonAction" prefHeight="460.0" prefWidth="801.0" text="Coin flip" GridPane.columnIndex="2">
-                            <font>
-                                <Font name="Arial Black" size="18.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="block" mnemonicParsing="false" onAction="#handleBlockButtonAction" prefHeight="235.0" prefWidth="337.0" text="Block" GridPane.rowIndex="1">
                             <font>
                                 <Font name="Arial Black" size="18.0" />
                             </font>
@@ -132,23 +123,37 @@
                                 <Font name="Arial Black" size="18.0" />
                             </font>
                         </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <children>
+                              <Button fx:id="block" mnemonicParsing="false" onAction="#handleBlockButtonAction" prefHeight="60.0" prefWidth="86.0" text="Block">
+                                  <font>
+                                      <Font name="Arial Black" size="18.0" />
+                                  </font>
+                              </Button>
+                              <TextField fx:id="dmgInput" alignment="CENTER" onAction="#handleDmgInput" prefHeight="70.0" prefWidth="46.0">
+                                 <font>
+                                    <Font name="Arial Black" size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                   <AnchorPane prefHeight="150.0" prefWidth="424.0">
                      <children>
-                        <TextField fx:id="targetBuff" layoutX="14.0" layoutY="25.0" prefHeight="36.0" prefWidth="193.0" promptText="Who is being buffed" AnchorPane.leftAnchor="14.0">
+                        <TextField fx:id="targetBuff" layoutX="14.0" layoutY="25.0" onAction="#handleTargetBuffInput" prefHeight="36.0" prefWidth="193.0" promptText="Who is being buffed" AnchorPane.leftAnchor="14.0">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="statBuffed" layoutX="259.0" layoutY="24.0" prefHeight="36.0" prefWidth="151.0" promptText="Stat buffed" AnchorPane.rightAnchor="14.0">
+                        <TextField fx:id="statBuffed" layoutX="259.0" layoutY="24.0" onAction="#handleStatBuffedInput" prefHeight="36.0" prefWidth="151.0" promptText="Stat buffed" AnchorPane.rightAnchor="14.0">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
                         </TextField>
                         <Polygon fill="#a1a1a1" layoutX="288.0" layoutY="19.0" points="-50.0, 40.0, -33.0, 24.0, -50.0, 7.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="26.0" />
                         <Line endX="29.0" layoutX="214.0" layoutY="42.0" startX="3.0" stroke="#a1a1a1" strokeWidth="10.0" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="37.0" />
-                        <Button fx:id="applyBuff" layoutX="281.0" layoutY="70.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="107.0" text="BUFF">
+                        <Button fx:id="applyBuff" layoutX="281.0" layoutY="70.0" mnemonicParsing="false" onAction="#handleApplyBuffButtonAction" prefHeight="46.0" prefWidth="107.0" text="BUFF">
                            <font>
                               <Font name="Arial Black" size="20.0" />
                            </font>
@@ -164,12 +169,12 @@
               <buttons>
                   <AnchorPane prefHeight="39.0" prefWidth="248.0">
                      <children>
-                      <Button fx:id="save" contentDisplay="TOP" mnemonicParsing="false" prefHeight="39.0" prefWidth="94.0" text="SAVE ">
+                      <Button fx:id="save" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleSaveButtonAction" prefHeight="39.0" prefWidth="94.0" text="SAVE ">
                            <font>
                               <Font name="Arial Black" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="clear" contentDisplay="TOP" layoutX="117.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="94.0" text="CLEAR">
+                        <Button fx:id="clear" contentDisplay="TOP" layoutX="117.0" mnemonicParsing="false" onAction="#handleClearButtonAction" prefHeight="39.0" prefWidth="94.0" text="CLEAR">
                            <font>
                               <Font name="Arial Black" size="18.0" />
                            </font>

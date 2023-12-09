@@ -8,7 +8,8 @@ public class Logic {
     private final int DEAFAULT_STAT_NUMBER = 4; 
 
     public Logic(Character chara) {
-        chara = this.chara;
+        System.out.println("Logic initialized");
+        this.chara = chara;
     }
 
 
@@ -32,7 +33,7 @@ public class Logic {
         int stat = chara.getStat(statNum);
         int modifer = 0;
         String[] statName = {"Strength", "Perception", "Dexterity", "Technical", "Attunement","Constitution"};
-
+        System.out.println("Attack stat: "+stat);
         if(die!= 20) {
             if(stat > DEAFAULT_STAT_NUMBER)
             {
