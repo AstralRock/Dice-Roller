@@ -1,16 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.SecondaryController">
-    <children>
-        <Label text="Secondary View" />
-        <Button fx:id="secondaryButton" text="Switch to Primary View" onAction="#switchToPrimary" />
-    </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+<SplitPane dividerPositions="0.6488294314381271" prefHeight="600.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <VBox layoutX="-2.0" prefHeight="598.0" prefWidth="433.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="115.0" prefWidth="424.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="80.0" prefHeight="49.0" prefWidth="265.0" text="DICE-O-MATIC" textAlignment="CENTER" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Arial Black" size="31.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="input" layoutX="14.0" layoutY="75.0" prefHeight="39.0" prefWidth="181.0" promptText="Input character" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="75.0" />
+                        <Button fx:id="reload" layoutX="279.0" layoutY="75.0" mnemonicParsing="false" text="RELOAD CHARCTERS" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font name="Arial Black" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <GridPane hgap="8.0" prefHeight="357.0" prefWidth="424.0" vgap="8.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Button fx:id="melee" mnemonicParsing="false" onAction="#handleMeleeButtonAction" prefHeight="135.0" prefWidth="191.0" text="Melee">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="stealth" mnemonicParsing="false" onAction="#handleStealthButtonAction" prefHeight="136.0" prefWidth="214.0" text="Stealth" GridPane.columnIndex="1">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="coinflip" mnemonicParsing="false" onAction="#handleCoinflipButtonAction" prefHeight="460.0" prefWidth="801.0" text="Coin flip" GridPane.columnIndex="2">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="block" mnemonicParsing="false" onAction="#handleBlockButtonAction" prefHeight="235.0" prefWidth="337.0" text="Block" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="spell" mnemonicParsing="false" onAction="#handleSpellButtonAction" prefHeight="149.0" prefWidth="271.0" text="Spell" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="ranged" mnemonicParsing="false" onAction="#handleRangedButtonAction" prefHeight="140.0" prefWidth="296.0" text="Ranged" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="dodge" mnemonicParsing="false" onAction="#handleDodgeButtonAction" prefHeight="128.0" prefWidth="278.0" text="Dodge" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="heal" mnemonicParsing="false" onAction="#handleHealButtonAction" prefHeight="202.0" prefWidth="255.0" text="Heal" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="tech" mnemonicParsing="false" onAction="#handleTechButtonAction" prefHeight="141.0" prefWidth="196.0" text="Tech" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="persuade" mnemonicParsing="false" onAction="#handlePersuadeButtonAction" prefHeight="151.0" prefWidth="307.0" text="Persuade" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="control" mnemonicParsing="false" onAction="#handleControlButtonAction" prefHeight="116.0" prefWidth="256.0" text="Control" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="diceRoll" mnemonicParsing="false" onAction="#handleDiceRollButtonAction" prefHeight="75.0" prefWidth="160.0" text="Dice Roll" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="hackOne" mnemonicParsing="false" onAction="#handleHackOneButtonAction" prefHeight="157.0" prefWidth="328.0" text="Hack (I)" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="hackTwo" mnemonicParsing="false" onAction="#handleHackTwoButtonAction" prefHeight="155.0" prefWidth="293.0" text="Hack (II)" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="hackThree" mnemonicParsing="false" onAction="#handleHackThreeButtonAction" prefHeight="310.0" prefWidth="415.0" text="Hack (III)" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="Arial Black" size="18.0" />
+                            </font>
+                        </Button>
+                     </children>
+                  </GridPane>
+                  <AnchorPane prefHeight="150.0" prefWidth="424.0">
+                     <children>
+                        <TextField fx:id="targetBuff" layoutX="14.0" layoutY="25.0" prefHeight="36.0" prefWidth="193.0" promptText="Who is being buffed" AnchorPane.leftAnchor="14.0">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="statBuffed" layoutX="259.0" layoutY="24.0" prefHeight="36.0" prefWidth="151.0" promptText="Stat buffed" AnchorPane.rightAnchor="14.0">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font>
+                        </TextField>
+                        <Polygon fill="#a1a1a1" layoutX="288.0" layoutY="19.0" points="-50.0, 40.0, -33.0, 24.0, -50.0, 7.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="26.0" />
+                        <Line endX="29.0" layoutX="214.0" layoutY="42.0" startX="3.0" stroke="#a1a1a1" strokeWidth="10.0" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="37.0" />
+                        <Button fx:id="applyBuff" layoutX="281.0" layoutY="70.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="107.0" text="BUFF">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <ButtonBar prefHeight="33.0" prefWidth="228.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <buttons>
+                  <AnchorPane prefHeight="39.0" prefWidth="248.0">
+                     <children>
+                      <Button fx:id="save" contentDisplay="TOP" mnemonicParsing="false" prefHeight="39.0" prefWidth="94.0" text="SAVE ">
+                           <font>
+                              <Font name="Arial Black" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="clear" contentDisplay="TOP" layoutX="117.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="94.0" text="CLEAR">
+                           <font>
+                              <Font name="Arial Black" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </buttons>
+            </ButtonBar>
+            <TextArea fx:id="terminal" layoutY="43.0" prefHeight="555.0" prefWidth="228.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>
