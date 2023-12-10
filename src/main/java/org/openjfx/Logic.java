@@ -7,32 +7,43 @@ public class Logic {
     private final int DEAFAULT_SUCCESS_NUMBER = 11;
     private final int DEAFAULT_STAT_NUMBER = 4; 
 
-    public Logic(Character chara) {
+    public Logic(Character charac) {
         System.out.println("Logic initialized");
-        this.chara = chara;
+        chara = charac;
+    }
+
+    public void setCharacter(Character charac) {
+        chara = charac;
+        this.name = charac.getName();
+        System.out.println("Character set: " + name);
     }
 
 
-    public int rollDie(boolean coinFlip) {
+    public int rollDie(boolean coinFlip, String type) {
         if (coinFlip) {
             int coin = (int) (Math.random() * 2);
             System.out.println("coinflip result: " + coin);
+            if(coin == 0) {
+                Console.output("coin landed on heads for "+ type);
+            } else {
+                Console.output("coin landed on tails for "+ type);
+            }
             return coin;
         } else {
             int die = (int) (Math.random() * 20 + 1);
-            System.out.println("Dice roll: "+ die);
+            Console.output("Dice rolled a "+die+ " for "+ type);
             return die;
         }
     }
 
     
-    public int attack(int statNum)
+    public int attack(int statNum, String type)
     {
-        int die = rollDie(false);
+        int die = rollDie(false, type);
         //success number calculations
         int stat = chara.getStat(statNum);
         int modifer = 0;
-        String[] statName = {"Strength", "Perception", "Dexterity", "Technical", "Attunement","Constitution"};
+        String[] statName = Character.stats;        
         System.out.println("Attack stat: "+stat);
         if(die!= 20) {
             if(stat > DEAFAULT_STAT_NUMBER)
@@ -47,25 +58,30 @@ public class Logic {
             if(die >= DEAFAULT_SUCCESS_NUMBER + modifer)
             {
                 System.out.println(name +" "+ statName[statNum] +" Attack successful");
-                return statNum;
+                System.out.println("Attack method return value"+ stat);
+                chara.removeTurn();   
+                return stat;
             }
             else
             {
-                System.out.println(name+" "+ statName[statNum] +"Attack failed");
+                System.out.println(name+" "+ statName[statNum] +" Attack failed");
+                System.out.println("Attack method return value"+ stat);
+                chara.removeTurn();
                 return 0;
             }
         } else {
             System.out.println("Critical hit!");
-            return statNum*2;
+            System.out.println("Attack method return value"+ stat);
+            chara.removeTurn();
+            return stat*2;
         }
-            
     }
 
 
     //Block and dodge and ward method
     public int counter(int damage, String type)
     {
-        int die = rollDie(true);
+        int die = rollDie(true, type);
         type = type.toLowerCase().trim();
         //determining type of attack
         int statNum=0;
@@ -88,15 +104,19 @@ public class Logic {
         {
 
             System.out.println("Bro blocked: "+statNum+" damage dealt "+damage);
+            chara.removeTurn();
             return damage - chara.getStat(statNum);
         }
         System.out.println("bro failed to block, damage dealt: "+damage);
+        chara.removeTurn();
         return damage;
     }
 
-    public boolean skillCheck(int statNum)
+
+    //stealth
+    public boolean skillCheck(int statNum, String type)
     {
-        if(attack(statNum) != 0)
+        if(attack(statNum, type) != 0)
         {
             return true;
         }
@@ -119,19 +139,22 @@ public class Logic {
                 modifer = (DEAFAULT_STAT_NUMBER - stat) * 2;
             }
 
-        int die = rollDie(false);
+        int die = rollDie(false, "Hacking");
         if(die >= successNumber + modifer)
         {
             System.out.println("Hacking successful");
+            chara.removeTurn();
             return true;
         }
         System.out.println("Hacking failed");
+        chara.removeTurn();
         return false;
 
     }
-
-    public boolean mindControl()
+    //mind control and re animation
+    public boolean control()
     {
+        
         int stat = chara.getStat(4);
         int modifer = 0;
         if(stat > DEAFAULT_STAT_NUMBER)
@@ -144,19 +167,27 @@ public class Logic {
         }
         int succNum = 2 * (DEAFAULT_SUCCESS_NUMBER + modifer);
 
-        int die = rollDie(false);
+        int die = rollDie(false, "control");
         if(die >= succNum )
         {
-            System.out.println("Mind control successful");
+            System.out.println(" control successful");
+            chara.removeTurn();
             return true;
         }
-        System.out.println("Mind control failed");
+        System.out.println(" control failed");
+        chara.removeTurn();
         return false;
     }
 
-    public int magicHeal()
+    public int Heal(boolean magic)
     {
-        int stat = chara.getStat(4);
+        int stat;
+        if(magic) {
+            stat = chara.getStat(4);
+        } else {
+            stat = chara.getStat(5);
+        }
+
         int modifer = 0;
         if(stat > DEAFAULT_STAT_NUMBER)
         {
@@ -169,13 +200,15 @@ public class Logic {
         int succNum = DEAFAULT_SUCCESS_NUMBER + modifer;
 
 
-        int die = rollDie(false);
+        int die = rollDie(false, "Heal");
         if(die >= succNum )
         {
             System.out.println("Heal successful");
+            chara.removeTurn();
             return stat;
         }
         System.out.println("Heal failed");
+        chara.removeTurn();
         return 0;
     }
 }

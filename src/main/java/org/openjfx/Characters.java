@@ -20,7 +20,7 @@ public class Characters {
                 if (line.length() > 0) { // Check if line has a length greater than 0
                     String identifier = line.substring(0, 1);
                     if (!identifier.equals("[") && !identifier.equals("\n") && !identifier.equals(" ")) {
-                        String[] chararcStrings = { line, "Strength", "Perception", "Dexterity", "Technical", "Attunement","Constitution" };
+                        String[] chararcStrings = Character.stats;
 
                         //cycles through the next few lines to and incrementally overwrite the default values of the array
                         //looks for the last ] of the character entry, takes the rest and trims it, this should catch any stupid extra spaces in case the user is dumb
@@ -49,7 +49,7 @@ public class Characters {
     }
 
 
-        public Character getCharacter(String name) {
+    public Character getCharacter(String name) {
             name = name.toUpperCase().trim();
             for (int i = 0; i < characters.size(); i++)
             {
@@ -57,13 +57,12 @@ public class Characters {
                 String curCharName = currentCharacter.getName().toUpperCase().trim();
                 if (curCharName.equals(name))
                 {
-                    //System.out.println("Character found "+charNames.get(i));
                     return currentCharacter;
                 }
             }
             System.out.println("Character not found");
             return null;
-        }
+    }
 
         public int numCharactersLoaded() {
             return characters.size();

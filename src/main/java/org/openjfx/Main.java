@@ -20,10 +20,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
-
-    BLogic ButtonBackend = new BLogic();
-    Logic logic = new Logic(null);
-
+    
     public static void main(String[] args) {
         launch(args);
     }
