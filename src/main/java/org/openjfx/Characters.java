@@ -20,7 +20,7 @@ public class Characters {
                 if (line.length() > 0) { // Check if line has a length greater than 0
                     String identifier = line.substring(0, 1);
                     if (!identifier.equals("[") && !identifier.equals("\n") && !identifier.equals(" ")) {
-                        String[] chararcStrings = Character.stats;
+                        String[] chararcStrings = { line, "Strength", "Perception", "Dexterity", "Technical", "Attunement","Constitution", "Charisma"};
 
                         //cycles through the next few lines to and incrementally overwrite the default values of the array
                         //looks for the last ] of the character entry, takes the rest and trims it, this should catch any stupid extra spaces in case the user is dumb

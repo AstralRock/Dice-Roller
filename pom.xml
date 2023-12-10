@@ -41,7 +41,7 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.openjfx.Main</mainClass>
+                            <mainClass>org.openjfx.fakeMain</mainClass>
                         </configuration>
                     </execution>
                 </executions>
@@ -51,7 +51,7 @@
             <configuration>
                 <archive>
                     <manifest>
-                        <mainClass>org.openjfx.Main</mainClass>
+                        <mainClass>org.openjfx.fakeMain</mainClass>
                     </manifest>
                 </archive>
                 <descriptorRefs>
@@ -68,6 +68,26 @@
                 </execution>
             </executions>
         </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <transformers>
+                                <transformer implementation=
+                                                     "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.openjfx.fakeMain</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
