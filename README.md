@@ -1,5 +1,5 @@
 Dice O Matic Version 1.0 is released!
-
+  [you can download it here](https://github.com/AstralRock/Dice-Roller/releases)
 
 How to use 
   put a characters.txt file in the same folder as the .jar file
